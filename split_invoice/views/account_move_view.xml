@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+       <record id="view_invoice_inherit" model="ir.ui.view">
+            <field name="name">account.move.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_button_box']" position="inside">
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="object" name="get_split_inv_count" 
+                        icon="fa-pencil-square-o" string="Invoice Split" attrs="{'invisible':[('split_inv_count','=',0)]}">
+                        <field string="Invoice Split" name="split_inv_count" widget="statinfo" />
+                    </button>
+                </div>
+            </xpath>
+
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="attrs">{'invisible': 1}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <field name="inv_split_ref" attrs="{'invisible':[('inv_split_ref','=',False)]}"/>
+                <field name="split_inv_count" invisible="1"/>
+            </xpath>      
+            </field>
+        </record>
+     </data>
+</odoo>
